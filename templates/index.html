@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades Completo</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f2f2f2, #d9d9d9); 
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 350px; 
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #FFA500;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff; 
+            text-align: center; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Conversor de Unidades</h1>
+
+    <form method="GET" action="/converter">
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" name="valor" required>
+
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria">
+            <option value="temperatura">Temperatura</option>
+            <option value="comprimento">Comprimento</option>
+            <option value="massa">Massa</option>
+            <option value="volume">Volume</option>
+            <option value="area">Área</option>
+            <option value="velocidade">Velocidade</option>
+        </select>
+
+        <label for="unidade_de">Unidade de Origem:</label>
+        <select id="unidade_de" name="unidade_de">
+            </select>
+
+        <label for="unidade_para">Unidade de Destino:</label>
+        <select id="unidade_para" name="unidade_para">
+            </select>
+
+        <button type="submit">Converter</button>
+    </form>
+
+    <div id="resultado"></div> 
+
+    <script>
+        const categoriaSelect = document.getElementById('categoria');
+        const unidadeDeSelect = document.getElementById('unidade_de');
+        const unidadeParaSelect = document.getElementById('unidade_para');
+        const resultadoDiv = document.getElementById('resultado');
+
+        categoriaSelect.addEventListener('change', function() {
+            const categoria = this.value;
+            // Limpa as opções anteriores
+            unidadeDeSelect.innerHTML = '';
+            unidadeParaSelect.innerHTML = '';
+
+            if (categoria === 'temperatura') {
+                // Adicione as opções de temperatura
+                addOption(unidadeDeSelect, 'C', 'Celsius (°C)');
+                addOption(unidadeDeSelect, 'F', 'Fahrenheit (°F)');
+                addOption(unidadeDeSelect, 'K', 'Kelvin (K)');
+                // Adicione as opções de temperatura para a unidade de destino
+                addOption(unidadeParaSelect, 'C', 'Celsius (°C)');
+                addOption(unidadeParaSelect, 'F', 'Fahrenheit (°F)');
+                addOption(unidadeParaSelect, 'K', 'Kelvin (K)');
+            } else if (categoria === 'comprimento') {
+                // Adicione as opções de comprimento
+                addOption(unidadeDeSelect, 'M', 'Metro (m)');
+                addOption(unidadeDeSelect, 'CM', 'Centímetro (cm)');
+                addOption(unidadeDeSelect, 'KM', 'Quilômetro (km)');
+                addOption(unidadeDeSelect, 'MI', 'Milha (mi)');
+                // Adicione as opções de comprimento para a unidade de destino
+                addOption(unidadeParaSelect, 'M', 'Metro (m)');
+                addOption(unidadeParaSelect, 'CM', 'Centímetro (cm)');
+                addOption(unidadeParaSelect, 'KM', 'Quilômetro (km)');
+                addOption(unidadeParaSelect, 'MI', 'Milha (mi)');
+            } else if (categoria === 'massa') {
+                // Adicione as opções de massa
+                addOption(unidadeDeSelect, 'G', 'Grama (g)');
+                addOption(unidadeDeSelect, 'KG', 'Quilograma (kg)');
+                addOption(unidadeDeSelect, 'LB', 'Libra (lb)');
+                // Adicione as opções de massa para a unidade de destino
+                addOption(unidadeParaSelect, 'G', 'Grama (g)');
+                addOption(unidadeParaSelect, 'KG', 'Quilograma (kg)');
+                addOption(unidadeParaSelect, 'LB', 'Libra (lb)');
+            } else if (categoria === 'volume') {
+                // Adicione as opções de volume
+                addOption(unidadeDeSelect, 'ML', 'Mililitro (ml)');
+                addOption(unidadeDeSelect, 'L', 'Litro (l)');
+                addOption(unidadeDeSelect, 'GAL', 'Galão (gal)');
+                // Adicione as opções de volume para a unidade de destino
+                addOption(unidadeParaSelect, 'ML', 'Mililitro (ml)');
+                addOption(unidadeParaSelect, 'L', 'Litro (l)');
+                addOption(unidadeParaSelect, 'GAL', 'Galão (gal)');
+            } else if (categoria === 'area') {
+                // Adicione as opções de área
+                addOption(unidadeDeSelect, 'M2', 'Metro quadrado (m²)');
+                addOption(unidadeDeSelect, 'CM2', 'Centímetro quadrado (cm²)');
+                addOption(unidadeDeSelect, 'KM2', 'Quilômetro quadrado (km²)');
+                addOption(unidadeDeSelect, 'HA', 'Hectare (ha)');
+                // Adicione as opções de área para a unidade de destino
+                addOption(unidadeParaSelect, 'M2', 'Metro quadrado (m²)');
+                addOption(unidadeParaSelect, 'CM2', 'Centímetro quadrado (cm²)');
+                addOption(unidadeParaSelect, 'KM2', 'Quilômetro quadrado (km²)');
+                addOption(unidadeParaSelect, 'HA', 'Hectare (ha)');
+            } else if (categoria === 'velocidade') {
+                // Adicione as opções de velocidade
+                addOption(unidadeDeSelect, 'KM/H', 'Quilômetro por hora (km/h)');
+                addOption(unidadeDeSelect, 'M/S', 'Metro por segundo (m/s)');
+                addOption(unidadeDeSelect, 'MI/H', 'Milha por hora (mi/h)');
+                // Adicione as opções de velocidade para a unidade de destino
+                addOption(unidadeParaSelect, 'KM/H', 'Quilômetro por hora (km/h)');
+                addOption(unidadeParaSelect, 'M/S', 'Metro por segundo (m/s)');
+                addOption(unidadeParaSelect, 'MI/H', 'Milha por hora (mi/h)');
+            }
+        });
+
+        function addOption(select, value, text) {
+            const option = document.createElement('option');
+            option.value = value;
+            option.text = text;
+            select.appendChild(option);
+        }
+
+        //  Atualiza o resultado dinamicamente no HTML
+        function atualizarResultado(resultado, unidade_para) {
+            resultadoDiv.innerHTML = `<p>Resultado: ${resultado.toFixed(2)} ${unidade_para}</p>`;
+        }
+
+        //  Adiciona um evento de envio do formulário
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); //  Impede o recarregamento da página
+            const formData = new FormData(event.target);
+            const valor = parseFloat(formData.get('valor'));
+            const categoria = formData.get('categoria');
+            const unidadeDe = formData.get('unidade_de');
+            const unidadePara = formData.get('unidade_para');
+    
+            fetch(`/converter?valor=${valor}&categoria=${categoria}&unidade_de=${unidadeDe}&unidade_para=${unidadePara}`) // URL Correta
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert(data.erro);
+                    } else {
+                        atualizarResultado(data.resultado, data.unidade_para);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                });
+        });
+    </script>
+</body>
+</html>
