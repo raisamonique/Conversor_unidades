@@ -5,7 +5,7 @@ const unidadeParaSelect = document.getElementById('unidade_para');
 const converterButton = document.getElementById('converter');
 const resultadoElement = document.getElementById('resultado');
 
-// Atualiza as opções das unidades de acordo com a categoria
+//Atualiza as opções das unidades
 function atualizarUnidades() {
   const categoria = categoriaSelect.value;
   unidadeDeSelect.innerHTML = '';
@@ -41,7 +41,7 @@ function atualizarUnidades() {
   }
 }
 
-// Faz a requisição para o backend (conversor.py)
+//Fazndo a requisição para o back
 function converter() {
   const valor = valorInput.value;
   const unidadeDe = unidadeDeSelect.value;
@@ -62,9 +62,8 @@ function converter() {
   }
 }
 
-// Eventos
+
 categoriaSelect.addEventListener('change', atualizarUnidades);
 converterButton.addEventListener('click', converter);
 
-// Inicializa as unidades
 atualizarUnidades();

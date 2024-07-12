@@ -106,7 +106,7 @@
             unidadeParaSelect.innerHTML = '';
 
             if (categoria === 'temperatura') {
-                // Adicione as opções de temperatura
+                // Adicionar as opções de temperatura
                 addOption(unidadeDeSelect, 'C', 'Celsius (°C)');
                 addOption(unidadeDeSelect, 'F', 'Fahrenheit (°F)');
                 addOption(unidadeDeSelect, 'K', 'Kelvin (K)');
@@ -115,51 +115,51 @@
                 addOption(unidadeParaSelect, 'F', 'Fahrenheit (°F)');
                 addOption(unidadeParaSelect, 'K', 'Kelvin (K)');
             } else if (categoria === 'comprimento') {
-                // Adicione as opções de comprimento
+                // Adicionar as opções de comprimento
                 addOption(unidadeDeSelect, 'M', 'Metro (m)');
                 addOption(unidadeDeSelect, 'CM', 'Centímetro (cm)');
                 addOption(unidadeDeSelect, 'KM', 'Quilômetro (km)');
                 addOption(unidadeDeSelect, 'MI', 'Milha (mi)');
-                // Adicione as opções de comprimento para a unidade de destino
+                // Adicionar as opções de comprimento para a unidade de destino
                 addOption(unidadeParaSelect, 'M', 'Metro (m)');
                 addOption(unidadeParaSelect, 'CM', 'Centímetro (cm)');
                 addOption(unidadeParaSelect, 'KM', 'Quilômetro (km)');
                 addOption(unidadeParaSelect, 'MI', 'Milha (mi)');
             } else if (categoria === 'massa') {
-                // Adicione as opções de massa
+                // Adicionar as opções de massa
                 addOption(unidadeDeSelect, 'G', 'Grama (g)');
                 addOption(unidadeDeSelect, 'KG', 'Quilograma (kg)');
                 addOption(unidadeDeSelect, 'LB', 'Libra (lb)');
-                // Adicione as opções de massa para a unidade de destino
+                // Adicionar as opções de massa para a unidade de destino
                 addOption(unidadeParaSelect, 'G', 'Grama (g)');
                 addOption(unidadeParaSelect, 'KG', 'Quilograma (kg)');
                 addOption(unidadeParaSelect, 'LB', 'Libra (lb)');
             } else if (categoria === 'volume') {
-                // Adicione as opções de volume
+                // Adicionar as opções de volume
                 addOption(unidadeDeSelect, 'ML', 'Mililitro (ml)');
                 addOption(unidadeDeSelect, 'L', 'Litro (l)');
                 addOption(unidadeDeSelect, 'GAL', 'Galão (gal)');
-                // Adicione as opções de volume para a unidade de destino
+                // Adicionar as opções de volume para a unidade de destino
                 addOption(unidadeParaSelect, 'ML', 'Mililitro (ml)');
                 addOption(unidadeParaSelect, 'L', 'Litro (l)');
                 addOption(unidadeParaSelect, 'GAL', 'Galão (gal)');
             } else if (categoria === 'area') {
-                // Adicione as opções de área
+                // Adicionar as opções de área
                 addOption(unidadeDeSelect, 'M2', 'Metro quadrado (m²)');
                 addOption(unidadeDeSelect, 'CM2', 'Centímetro quadrado (cm²)');
                 addOption(unidadeDeSelect, 'KM2', 'Quilômetro quadrado (km²)');
                 addOption(unidadeDeSelect, 'HA', 'Hectare (ha)');
-                // Adicione as opções de área para a unidade de destino
+                // Adicionar as opções de área para a unidade de destino
                 addOption(unidadeParaSelect, 'M2', 'Metro quadrado (m²)');
                 addOption(unidadeParaSelect, 'CM2', 'Centímetro quadrado (cm²)');
                 addOption(unidadeParaSelect, 'KM2', 'Quilômetro quadrado (km²)');
                 addOption(unidadeParaSelect, 'HA', 'Hectare (ha)');
             } else if (categoria === 'velocidade') {
-                // Adicione as opções de velocidade
+                // Adicionar as opções de velocidade
                 addOption(unidadeDeSelect, 'KM/H', 'Quilômetro por hora (km/h)');
                 addOption(unidadeDeSelect, 'M/S', 'Metro por segundo (m/s)');
                 addOption(unidadeDeSelect, 'MI/H', 'Milha por hora (mi/h)');
-                // Adicione as opções de velocidade para a unidade de destino
+                // Adicionar as opções de velocidade para a unidade de destino
                 addOption(unidadeParaSelect, 'KM/H', 'Quilômetro por hora (km/h)');
                 addOption(unidadeParaSelect, 'M/S', 'Metro por segundo (m/s)');
                 addOption(unidadeParaSelect, 'MI/H', 'Milha por hora (mi/h)');
@@ -173,12 +173,12 @@
             select.appendChild(option);
         }
 
-        //  Atualiza o resultado dinamicamente no HTML
+        //  Atualizando o resultado 
         function atualizarResultado(resultado, unidade_para) {
             resultadoDiv.innerHTML = `<p>Resultado: ${resultado.toFixed(2)} ${unidade_para}</p>`;
         }
 
-        //  Adiciona um evento de envio do formulário
+       
         document.querySelector('form').addEventListener('submit', function(event) {
             event.preventDefault(); //  Impede o recarregamento da página
             const formData = new FormData(event.target);
